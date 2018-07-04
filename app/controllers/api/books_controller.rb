@@ -1,6 +1,6 @@
 class Api::BooksController < ApplicationController
   def index
-    books = Book.all
+    @books = Book.all
     render "index.json.jbuilder"
   end
 
@@ -17,7 +17,8 @@ class Api::BooksController < ApplicationController
 
   def show
     book_id = params[:id]
-    book = Book.find_by(id: book_id)
+    @book = Book.find_by(id: book_id)
+    # render "show.json.jbuilder"
     render "show.json.jbuilder"
   end
   
