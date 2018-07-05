@@ -5,13 +5,13 @@ class Api::BooksController < ApplicationController
   end
 
   def create
-    book = Book.new(
+    @book = Book.new(
       title: params[:title],
       author: params[:author],
       publisher: params[:publisher],
       genre: params[:genre]
     )
-    book.save
+    @book.save
     render "show.json.jbuilder"
   end
 
@@ -24,7 +24,7 @@ class Api::BooksController < ApplicationController
   
   def update
     book_id = params[:id]
-    book = Book.find_by(id: book_id)
+    @book = Book.find_by(id: book_id)
     book.title = params[:title] || book.title
     book.author =  params[:author] || book.author
     book.publisher = params[:publisher] || book.publisher
@@ -35,7 +35,7 @@ class Api::BooksController < ApplicationController
 
   def destroy
     book_id = params[:id]
-    book = Book.find_by(id: book_id)
+    @book = Book.find_by(id: book_id)
     book.destroy
     render json: {message: "Book successfully removed from library"}
   end
